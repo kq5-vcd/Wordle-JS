@@ -15,7 +15,9 @@ let alphabet = {};
 let wordLength = {};
 
 let redundant = ['.', ';', ':', '\'' , ',', ' ', '-' , '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
 let cleanDict = [];
+let cleanAlphabet = [];
 
 dict.forEach(word => {
     len = 0;
@@ -26,6 +28,7 @@ dict.forEach(word => {
         if(!(redundant.includes(char))) {
             if(!(char in alphabet)) {
                 alphabet[char] = 1;
+                cleanAlphabet.push(char);
             } else {
                 alphabet[char]++;
             }
@@ -48,7 +51,9 @@ console.log(alphabet);
 console.log(wordLength);
 console.log(cleanDict);
 
-let condensed = cleanDict.join(" ");
+let condensedDict = cleanDict.join("\n");
+let condensedAlphabet = cleanAlphabet.join("\n");
 //console.log(condensed);
-fs.writeFileSync("dictionary.txt", condensed);
+fs.writeFileSync("dictionary.txt", condensedDict);
+fs.writeFileSync("alphabet.txt", condensedAlphabet);
 console.log('writeFile called');
